@@ -1,5 +1,4 @@
-
-cription
+Project Description
 This project is a showcase of my journey in building and deploying a Python application using modern DevOps practices. It serves as a complete, end-to-end demonstration of a full CI/CD pipeline, from writing code to containerization and live deployment.
 
 Project 1: Python Web App Deployment
