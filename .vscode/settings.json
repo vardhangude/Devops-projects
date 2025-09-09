@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "python-aws-ci-app"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
