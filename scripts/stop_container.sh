@@ -1,13 +1,14 @@
 #!/bin/bash
-
 set -e
 
-IMAGE_NAME="my-app-image"
+# Find the name of the image you want to remove
+# Replace 'your-app-name' with the unique part of your image name
+IMAGE_NAME=$(docker images | grep 'docker-image' | awk '{print $1}')
 
-# Check if the image exists before trying to remove it
-if [ "$(docker images -q $IMAGE_NAME)" ]; then
-  echo "Removing existing image..."
-  docker rmi $IMAGE_NAME
+# Check if an image was found before trying to remove it
+if [ ! -z "$IMAGE_NAME" ]; then
+    echo "Removing existing image: $IMAGE_NAME"
+    docker rmi "$IMAGE_NAME"
 else
-  echo "Image does not exist, nothing to remove."
+    echo "No matching image found."
 fi
