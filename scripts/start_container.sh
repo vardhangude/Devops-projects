@@ -8,5 +8,4 @@ set -e
 docker pull vardhan018/aws-cicd-app:latest
 
 #run the docker image in the inter-active terminal
-
-docker run -d 8000:8000  vardhan018/aws-cicd-app:latest
+docker run -d -p 8000:8000 vardhan018/aws-cicd-app:latest
