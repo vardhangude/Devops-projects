@@ -12,4 +12,4 @@ def welcome_page():
 if __name__ == '__main__':
     # This is a development server. For production, a WSGI server like Gunicorn should be used.
     # The start_server.sh script in the initial report handles this for you.
-    application.run(host='0.0.0.0', port=5000)
+    application.run(host='0.0.0.0', port=5000) 
