@@ -1,5 +1,20 @@
 #!/bin/bash
+
+set -e
+
+#pre-defined values
+imgName="my_app_name"
+contianerName="my_app_container"
+
+if [ $(docker ps -a -q -f name=$CONTAINER_NAME) ]; then
+    echo "Stopping and removing existing container..."
+    docker stop $CONTAINER_NAME
+    docker rm $CONTAINER_NAME
+fi
+
  
 #stop the running container (if any)
-containerId = docker ps | awk -F" " '{Print $1}'
-docker rm -f $containerId
+if [ $(docker images -q $IMAGE_NAME) ]; then
+    echo "Removing existing image..."
+    docker rmi $IMAGE_NAME
+fi
