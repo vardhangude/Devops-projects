@@ -1,6 +1,5 @@
 #!/bin/bash
-set -e 
-
+ 
 #stop the running container (if any)
-$dockerImg = docker ps | awk -F' ' "{print$1}"
-docker rmi $dockerImg
+containerId = docker ps | awk -F" " '{Print $1}'
+docker rm -f $containerId
