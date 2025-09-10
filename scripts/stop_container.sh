@@ -11,4 +11,4 @@ if [ ! -z "$IMAGE_NAME" ]; then
     docker rmi "$IMAGE_NAME"
 else
     echo "No matching image found."
-fi
+fi 
