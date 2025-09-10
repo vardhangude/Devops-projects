@@ -2,19 +2,12 @@
 
 set -e
 
-#pre-defined values
-IMAGE_NAME="my_app_name"
-CONTAINER_NAME="my_app_container"
+IMAGE_NAME="my-app-image"
 
-if [ $(docker ps -a -q -f name=$CONTAINER_NAME) ]; then
-    echo "Stopping and removing existing container..."
-    docker stop $CONTAINER_NAME
-    docker rm $CONTAINER_NAME
-fi
-
- 
-#stop the running container (if any)
-if [ $(docker images -q $IMAGE_NAME) ]; then
-    echo "Removing existing image..."
-    docker rmi $IMAGE_NAME
+# Check if the image exists before trying to remove it
+if [ "$(docker images -q $IMAGE_NAME)" ]; then
+  echo "Removing existing image..."
+  docker rmi $IMAGE_NAME
+else
+  echo "Image does not exist, nothing to remove."
 fi
