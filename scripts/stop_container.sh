@@ -3,8 +3,8 @@
 set -e
 
 #pre-defined values
-imgName="my_app_name"
-contianerName="my_app_container"
+IMAGE_NAME="my_app_name"
+CONTAINER_NAME="my_app_container"
 
 if [ $(docker ps -a -q -f name=$CONTAINER_NAME) ]; then
     echo "Stopping and removing existing container..."
