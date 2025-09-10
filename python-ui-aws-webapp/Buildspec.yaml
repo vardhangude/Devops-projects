@@ -1,0 +1,43 @@
+version: 0.2
+
+
+env:
+  parameter-store:
+    DOCKER_URL : /vardhaman-solutions/docker_cred/url
+    DOCKER_USERNAME : /vardhaman-solutions/docker_cred/username
+    DOCKER_PASSWORD : /vardhaman-solutions/docker_cred/password
+    
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+    
+  pre_build:
+    commands:
+      - echo "Installing packages..."
+      - pip install --no-cache-dir -r python-ui-aws-webapp/requirements.txt
+    finally:
+      - echo "Installed python packages along with flask..."
+      
+  build:
+    commands:
+      - cd python-ui-aws-webapp/
+      - echo "logging into dockerhub artifact registary"
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin "$DOCKER_URL"
+      - echo "executing build docker image"
+      - docker build -t "$DOCKER_URL/$DOCKER_USERNAME/aws-cicd-app:latest" .
+      - docker push "$DOCKER_URL/$DOCKER_USERNAME/aws-cicd-app:latest"
+    finally:
+      - echo "Logged into artifact registry called docker hub and uploaded successfully..."  
+  
+  post_build:
+    commands:
+      - echo "Build completed sucesfully using aws CI pipeline."
+    finally:
+      - echo "Please go to docker hub to verify build succesful or not"
+  
+artifacts:
+  files:
+    - '**/*'
+  base-directory: /python-ui-aws-webapp
